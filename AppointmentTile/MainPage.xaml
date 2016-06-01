@@ -8,6 +8,26 @@
     mc:Ignorable="d">
 
 	<Grid Background="Black">
+		<!--<VisualStateManager.VisualStateGroups>
+			<VisualStateGroup>
+				<VisualState x:Name="wideView">
+					<VisualState.StateTriggers>
+						<AdaptiveTrigger MinWindowWidth="720"/>
+					</VisualState.StateTriggers>
+					<VisualState.Setters>
+						<Setter Target="best.()" Value="" />
+					</VisualState.Setters>
+				</VisualState>
+				<VisualState x:Name="narrowView">
+					<VisualState.StateTriggers>
+						<AdaptiveTrigger MinWindowWidth="720"/>
+					</VisualState.StateTriggers>
+					<VisualState.Setters>
+						<Setter Target="best.()" Value="" />
+					</VisualState.Setters>
+				</VisualState>
+			</VisualStateGroup>
+		</VisualStateManager.VisualStateGroups>-->
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="50"/>
 			<ColumnDefinition Width="*"/>
@@ -42,16 +62,22 @@
 				</StackPanel>
 			</SplitView.Pane>
 			<SplitView.Content>
-				<StackPanel Margin="55,5,5,5">
-					<TextBlock Text="Basic SplitView" Foreground="White" />
-					<ListBox ItemsSource="{Binding AppointmentList}"></ListBox>
-					<ListView Foreground="White" x:Name="AppointmentListView">
-						<ListView.ItemTemplate>
-							<DataTemplate>
-								<ListViewItem Content="{Binding Subject}"/>
+				<StackPanel>
+					<TextBlock Text="Appointments" Foreground="White" Margin="5" />
+					<ScrollViewer Margin="5" VerticalScrollMode="Disabled" MaxHeight="140">
+						<ListView x:Name="AppointmentListView" BorderBrush="Blue" BorderThickness="1">
+						<ListView.ItemTemplate>							
+							<DataTemplate>								
+								<StackPanel Orientation="Horizontal" Margin="2">
+										<TextBlock Foreground="White" Text="{Binding DayAndMonth}" Margin="2"/>
+										<TextBlock Foreground="White" Text="{Binding Time}" Margin="2" />
+										<TextBlock Foreground="White" Text="{Binding Subject}" Margin="2"/>
+								</StackPanel>								
 							</DataTemplate>
 						</ListView.ItemTemplate>
 					</ListView>
+					</ScrollViewer>
+					<Button x:Name="RefreshAppointmentListButton" Content="Refresh"  Foreground="White" HorizontalAlignment="Center" Background="DimGray" Margin="5" Click="RefreshAppointmentListButton_Click" />
 				</StackPanel>
 			</SplitView.Content>
 		</SplitView>
